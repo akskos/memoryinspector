@@ -14,5 +14,10 @@ func main() {
 
   lines := fileToLines(fmt.Sprintf("/proc/%d/maps", *pidPtr))
   addrSpace := getAddressSpaceForLabel(lines, "[heap]")
-  readMemorySpace(*pidPtr, addrSpace)
+  heapData := readMemorySpace(*pidPtr, addrSpace)
+
+  fmt.Printf("heap begins at %d\n", addrSpace[0])
+
+  matchString := []byte("hello")
+  fmt.Println(findMatchesInByteArray(heapData, matchString))
 }
