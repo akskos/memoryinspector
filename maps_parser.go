@@ -3,9 +3,9 @@
 package main
 
 import (
-  "fmt"
   "os"
   "bufio"
+  "strings"
 )
 
 func check(e error) {
@@ -25,4 +25,17 @@ func fileToLines(filename string) []string {
     result = append(result, scanner.Text())
   }
   return result
+}
+
+// Parses {lines} and finds address space defined for {label}
+func getAddressSpaceForLabel(lines []string, label string) [2]int {
+  addressSpace := [2]int{}
+  for _, line := range lines {
+    if strings.Contains(line, label) {
+      addressSpace[0] = 0
+      addressSpace[1] = 88
+      break
+    }
+  }
+  return addressSpace
 }

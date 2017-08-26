@@ -12,5 +12,6 @@ func main() {
   flag.Parse()
   fmt.Printf("Inspecting memory for process: %d\n", *pidPtr)
 
-  fmt.Println(fileToLines("filename"))
+  lines := fileToLines(fmt.Sprintf("/proc/%d/maps", *pidPtr))
+  fmt.Println(getAddressSpaceForLabel(lines, "[heap]"))
 }
