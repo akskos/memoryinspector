@@ -14,7 +14,8 @@ func readMemorySpace(pid int, space [2]int64) []byte {
   check(err)
   defer file.Close()
   file.Seek(space[0], 0)
-  buffer := make([]byte, 100)
+  memoryLength := space[1] - space[0]
+  buffer := make([]byte, memoryLength)
   n, err := file.Read(buffer)
   check(err)
   fmt.Printf("%d bytes read\n", n)
