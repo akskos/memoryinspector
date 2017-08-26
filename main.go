@@ -7,8 +7,6 @@ import (
 )
 
 func main() {
-  fmt.Println("This is meminspector")
-
   pidPtr := flag.Int("pid", 0, "process id")
   matchStringPtr := flag.String("m", "", "will find addresses for matches of this string in process memory data")
   overwritePtr := flag.String("o", "", "string used to overwrite matches")
@@ -19,7 +17,7 @@ func main() {
   addrSpace := getAddressSpaceForLabel(lines, "[heap]")
   heapData := readMemorySpace(*pidPtr, addrSpace)
 
-  fmt.Printf("heap begins at %d\n", addrSpace[0])
+  fmt.Printf("Heap begins at %d\n", addrSpace[0])
 
   matchBytes := []byte(*matchStringPtr)
   matches := findMatchesInByteArray(heapData, matchBytes)
