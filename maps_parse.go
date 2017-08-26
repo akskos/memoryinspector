@@ -1,4 +1,4 @@
-// Parses /proc/{pid}/maps
+// Functions for parsing /proc/{pid}/maps
 
 package main
 
