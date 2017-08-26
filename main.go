@@ -13,5 +13,6 @@ func main() {
   fmt.Printf("Inspecting memory for process: %d\n", *pidPtr)
 
   lines := fileToLines(fmt.Sprintf("/proc/%d/maps", *pidPtr))
-  fmt.Println(getAddressSpaceForLabel(lines, "[heap]"))
+  addrSpace := getAddressSpaceForLabel(lines, "[heap]")
+  readMemorySpace(*pidPtr, addrSpace)
 }
