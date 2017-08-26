@@ -6,6 +6,7 @@ import (
   "os"
   "bufio"
   "strings"
+  "strconv"
 )
 
 func check(e error) {
@@ -28,12 +29,17 @@ func fileToLines(filename string) []string {
 }
 
 // Parses {lines} and finds address space defined for {label}
-func getAddressSpaceForLabel(lines []string, label string) [2]int {
-  addressSpace := [2]int{}
+func getAddressSpaceForLabel(lines []string, label string) [2]int64 {
+  addressSpace := [2]int64{}
   for _, line := range lines {
     if strings.Contains(line, label) {
-      addressSpace[0] = 0
-      addressSpace[1] = 88
+      memoryColumn := strings.Split(line, " ")[0]
+      addressStrings := strings.Split(memoryColumn, "-")
+      var err error
+      addressSpace[0], err = strconv.ParseInt(addressStrings[0], 16, 64)
+      check(err)
+      addressSpace[1], err = strconv.ParseInt(addressStrings[1], 16, 64)
+      check(err)
       break
     }
   }
