@@ -11,4 +11,6 @@ func main() {
   pidPtr := flag.Int("pid", 0, "process id")
   flag.Parse()
   fmt.Printf("Inspecting memory for process: %d\n", *pidPtr)
+
+  fmt.Println(fileToLines("filename"))
 }
