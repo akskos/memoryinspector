@@ -9,12 +9,6 @@ import (
   "strconv"
 )
 
-func check(e error) {
-  if e != nil {
-    panic(e)
-  }
-}
-
 // Reads {filename} and creates a slice of its lines
 func fileToLines(filename string) []string {
   result := []string{}
