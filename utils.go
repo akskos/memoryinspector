@@ -4,6 +4,8 @@ package main
 
 import (
   "bytes"
+  "os"
+  "fmt"
 )
 
 func check(e error) {
@@ -28,4 +30,11 @@ func findMatchesInByteArray(haystack []byte, needle []byte) []int {
     haystack = haystack[index+1:]
   }
   return offsets
+}
+
+// Returns a file object for {pid} memory
+func openProcessMem(pid int) *os.File {
+  file, err := os.Open(fmt.Sprintf("/proc/%d/mem", pid))
+  check(err)
+  return file
 }
