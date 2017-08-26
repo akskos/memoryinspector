@@ -9,6 +9,7 @@ func main() {
   fmt.Println("This is meminspector")
 
   pidPtr := flag.Int("pid", 0, "process id")
+  matchStringPtr := flag.String("s", "", "will find addresses for matches of this string in process memory data")
   flag.Parse()
   fmt.Printf("Inspecting memory for process: %d\n", *pidPtr)
 
@@ -18,8 +19,8 @@ func main() {
 
   fmt.Printf("heap begins at %d\n", addrSpace[0])
 
-  matchString := []byte("hello")
-  matches := findMatchesInByteArray(heapData, matchString)
+  matchBytes := []byte(*matchStringPtr)
+  matches := findMatchesInByteArray(heapData, matchBytes)
   fmt.Println(matches)
   for _, match := range matches {
     fmt.Printf("Match at mem address: %d\n", addrSpace[0] + int64(match))
