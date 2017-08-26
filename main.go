@@ -19,5 +19,9 @@ func main() {
   fmt.Printf("heap begins at %d\n", addrSpace[0])
 
   matchString := []byte("hello")
-  fmt.Println(findMatchesInByteArray(heapData, matchString))
+  matches := findMatchesInByteArray(heapData, matchString)
+  fmt.Println(matches)
+  for _, match := range matches {
+    fmt.Printf("Match at mem address: %d\n", addrSpace[0] + int64(match))
+  }
 }
